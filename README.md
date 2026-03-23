@@ -1,45 +1,50 @@
-# TP9 - Spring Security
+# TP10 - Spring Security
 
 ## Objectif
 
 Ce projet suit les etapes montrees dans les images :
 
 - configuration d'un projet Spring Boot avec `Spring Web`, `Spring Security` et `Thymeleaf`
+- ajout de `Spring Boot DevTools` pour le rechargement en developpement
 - creation de deux utilisateurs en memoire
 - protection des routes selon les roles
 - personnalisation de la page de connexion
+- redirection vers `/home` apres authentification
 
 ## Comptes de test
 
-- `user / 1111` : acces a `/user/dashboard`
-- `admin / 1234` : acces a toutes les pages securisees
+- `user / 1111` : acces a `/home` puis a `/user/dashboard`
+- `admin / 1234` : acces a `/home`, `/user/dashboard` et `/admin/dashboard`
 
 ## URLs utiles
 
-- `http://localhost:8080/`
+- `http://localhost:8080/login`
+- `http://localhost:8080/home`
 - `http://localhost:8080/user/dashboard`
 - `http://localhost:8080/admin/dashboard`
-- `http://localhost:8080/login`
 - `http://localhost:8080/logout`
 
 ## Structure
 
 ```text
-tp9/
+tp10/
 |- pom.xml
 |- mvnw
 |- mvnw.cmd
 |- src/
 |  |- main/
 |  |  |- java/ma/fstg/security/
-|  |  |  |- Tp9Application.java
+|  |  |  |- Tp10Application.java
 |  |  |  |- config/SecurityConfig.java
-|  |  |  |- web/HomeController.java
-|  |  |  `- web/LoginController.java
+|  |  |  `- web/AuthController.java
 |  |  `- resources/
 |  |     |- application.properties
-|  |     `- templates/login.html
-|  `- test/java/ma/fstg/security/Tp9ApplicationTests.java
+|  |     `- templates/
+|  |        |- login.html
+|  |        |- home.html
+|  |        |- admin-dashboard.html
+|  |        `- user-dashboard.html
+|  `- test/java/ma/fstg/security/Tp10ApplicationTests.java
 `- README.md
 ```
 

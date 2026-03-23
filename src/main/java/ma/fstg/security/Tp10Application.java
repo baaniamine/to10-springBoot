@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Tp9Application {
+public class Tp10Application {
 
     public static void main(String[] args) {
-        // Starts the Spring Boot application.
-        SpringApplication.run(Tp9Application.class, args);
+        // Bootstraps the TP10 Spring application.
+        SpringApplication.run(Tp10Application.class, args);
     }
 }

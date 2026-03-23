@@ -3,7 +3,6 @@ package ma.fstg.security.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -16,7 +15,6 @@ public class SecurityConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        // In-memory users keep this TP focused on authentication and roles.
         UserDetails admin = User.withUsername("admin")
                 .password("{noop}1234")
                 .roles("ADMIN")
@@ -34,38 +32,26 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/login").permitAll()
+                        .requestMatchers("/login", "/css/**").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/user/**").hasAnyRole("USER", "ADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
-                        .successHandler(this::handleLoginSuccess)
+                        .loginProcessingUrl("/authenticate")
+                        .defaultSuccessUrl("/home", true)
+                        .failureUrl("/login?error=true")
                         .permitAll()
                 )
                 .logout(logout -> logout
-                        // Allow a direct browser call to /logout for this classroom demo.
-                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                        .logoutSuccessUrl("/login?logout")
+                        // Allow logout from a simple anchor tag in the templates.
+                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
+                        .logoutSuccessUrl("/login?logout=true")
                         .permitAll()
                 );
 
+        // The filter chain centralizes authentication and authorization rules.
         return http.build();
-    }
-
-    private void handleLoginSuccess(jakarta.servlet.http.HttpServletRequest request,
-                                    jakarta.servlet.http.HttpServletResponse response,
-                                    Authentication authentication) throws java.io.IOException {
-        // Redirect users to the page that matches their role.
-        boolean isAdmin = authentication.getAuthorities().stream()
-                .anyMatch(authority -> authority.getAuthority().equals("ROLE_ADMIN"));
-
-        if (isAdmin) {
-            response.sendRedirect("/admin/dashboard");
-            return;
-        }
-
-        response.sendRedirect("/user/dashboard");
     }
 }

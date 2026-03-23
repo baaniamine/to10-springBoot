@@ -12,10 +12,10 @@
     </parent>
 
     <groupId>ma.fstg.security</groupId>
-    <artifactId>tp9</artifactId>
+    <artifactId>tp10</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>tp9</name>
-    <description>TP 9 Spring Security avec page de connexion personnalisee</description>
+    <name>tp10</name>
+    <description>TP 10 Spring Security avec controle d'acces par roles</description>
 
     <properties>
         <java.version>17</java.version>
@@ -35,6 +35,13 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
         </dependency>
 
         <dependency>
