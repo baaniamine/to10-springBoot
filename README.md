@@ -11,10 +11,12 @@ Ce projet suit les etapes montrees dans les images :
 - personnalisation de la page de connexion
 - redirection vers `/home` apres authentification
 
-## Comptes de test
+## Demo
 
-- `user / 1111` : acces a `/home` puis a `/user/dashboard`
-- `admin / 1234` : acces a `/home`, `/user/dashboard` et `/admin/dashboard`
+
+https://github.com/user-attachments/assets/b93fdecc-411d-4346-aca7-8f090b74f4df
+
+
 
 ## URLs utiles
 
@@ -48,12 +50,3 @@ tp10/
 `- README.md
 ```
 
-## Bonnes pratiques
-
-- En production, il faut encoder les mots de passe avec `BCryptPasswordEncoder`.
-- Il vaut mieux eviter de coder les roles en dur dans une vraie application.
-- Les regles de securite doivent rester centralisees dans une configuration dediee.
-
-## Important
-
-Spring Boot `3.3.x` demande Java `17` ou plus. Si la machine utilise encore Java 8, il faut installer un JDK 17+ avant de lancer l'application.
